@@ -7,7 +7,16 @@ export const validate = (schema: ZodType, target: ValidationTarget = 'body') => 
   return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const parsed = await schema.parseAsync(req[target]);
-      req[target] = parsed;
+      if (target === 'query') {
+        Object.defineProperty(req, 'query', {
+          value: parsed,
+          writable: true,
+          enumerable: true,
+          configurable: true,
+        });
+      } else {
+        req[target] = parsed;
+      }
       next();
     } catch (error) {
       if (error instanceof ZodError) {
