@@ -27,12 +27,16 @@ export const Chat: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const displayedPrompts =
     selectedCategory === 'All'
       ? QUICK_PROMPTS
       : CATEGORIZED_PROMPTS.find((c) => c.category === selectedCategory)?.prompts || QUICK_PROMPTS;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     try {
@@ -43,7 +47,9 @@ export const Chat: React.FC = () => {
   }, [messages]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages, isTyping]);
 
   useEffect(() => {
@@ -176,7 +182,7 @@ export const Chat: React.FC = () => {
         </div>
 
         {/* 2. Conversation Stream */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 text-[13px] leading-relaxed scroll-smooth bg-canvas">
+        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4 text-[13px] leading-relaxed scroll-smooth bg-canvas">
           <div className="flex items-center justify-center my-1">
             <span className="px-2.5 py-0.5 rounded-full border border-hairline bg-surface-container-low font-mono-eyebrow text-[10px] text-mute uppercase">
               SESSION ACTIVE
@@ -249,8 +255,6 @@ export const Chat: React.FC = () => {
               </div>
             </div>
           )}
-
-          <div ref={messagesEndRef} />
         </div>
 
         {/* 3. Predefined Category Tabs & Quick Reply Chips */}

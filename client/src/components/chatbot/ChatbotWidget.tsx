@@ -24,7 +24,7 @@ export const ChatbotWidget: React.FC = () => {
   });
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -40,8 +40,8 @@ export const ChatbotWidget: React.FC = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isOpen && messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [messages, isOpen, isTyping]);
 
@@ -183,7 +183,7 @@ export const ChatbotWidget: React.FC = () => {
           </div>
 
           {/* Messages Scroll Area */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-canvas">
+          <div ref={messagesContainerRef} className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-canvas">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -237,8 +237,6 @@ export const ChatbotWidget: React.FC = () => {
                 </div>
               </div>
             )}
-
-            <div ref={messagesEndRef} />
           </div>
 
           {/* Input Form */}
