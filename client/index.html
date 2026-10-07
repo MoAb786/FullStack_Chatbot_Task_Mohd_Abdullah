@@ -1,12 +1,41 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>client</title>
+    <title>DroneTV — Aerial Intelligence & DGCA Training Platform</title>
+    <!-- Anti-FOUC Dark Mode Immediate Script -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('dronetv_theme');
+          var theme = saved === 'light' ? 'light' : 'dark';
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          }
+        } catch (_) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    <!-- Google Fonts: Geist, JetBrains Mono, Material Symbols Outlined -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="bg-canvas text-ink font-sans antialiased min-h-screen selection:bg-ink selection:text-canvas">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
