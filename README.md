@@ -74,21 +74,22 @@
 
 ```text
 FullStack_Chatbot_Task_Mohd_Abdullah/
-├── .env.example                               # Root environment configuration template
+├── .env.example                               # Environment configuration template
 ├── .gitignore                                 # Git ignore rules
 ├── README.md                                  # Complete project documentation
-├── DESIGN.md                                  # Design tokens & specifications
-├── IPAGE_Group_FullStack_Intern_Assignment.pdf# Original assignment brief
 │
 ├── client/                                    # Frontend (React 19 + TypeScript + Vite)
+│   ├── index.html                             # Single page HTML entry point
 │   ├── package.json                           # Frontend dependencies & scripts
 │   ├── vite.config.ts                         # Vite & Tailwind v4 plugin setup
 │   ├── tsconfig.json                          # TypeScript configuration
 │   ├── wrangler.jsonc                         # Cloudflare Workers deployment configuration
-│   ├── .env.production                        # Production API endpoint
-│   ├── public/                                # Static assets
+│   ├── public/                                # Public assets & demo screenshots
+│   │   ├── favicon.svg                        # Platform favicon
+│   │   ├── icons.svg                          # Vector icons
+│   │   └── img/                               # Application screenshots
 │   └── src/
-│       ├── main.tsx                           # Application entry point
+│       ├── main.tsx                           # React DOM mount point
 │       ├── App.tsx                            # Root routing & theme providers
 │       ├── index.css                          # Tailwind v4 theme & CSS custom properties
 │       ├── types/                             # TypeScript interfaces & types
@@ -220,14 +221,29 @@ npm start
 
 ## 📸 Screenshots
 
-| View | Description |
-| :--- | :--- |
-| **Landing Page & 3D HUD** | Hero section with interactive 60fps 3D Vector Avionics HUD canvas in Dark Mode |
-| **Services Catalog** | Enterprise UAV inspection, cinematography, and mapping with interactive specs modal |
-| **Pilot Training Academy** | DGCA certified training tracks with syllabus breakdown and enrollment hooks |
-| **Lead & Contact Intake** | Real-time Zod validated contact intake desk with airspace coverage map |
-| **AI Support Assistant** | Deterministic copilot with categorized quick prompts, conversation reset, and CTA actions |
-| **Admin Operations Portal** | Multi-tab dashboard with live inquiry CRUD, status transitions, search, filter, and CSV export |
+### 1. Landing Page & 3D Avionics HUD
+Hero section featuring the interactive 60fps 3D Vector Avionics HUD canvas, telemetry gauges, and core capabilities in Dark Mode.
+![Landing Page & 3D HUD](client/public/img/Landing%20Page%20%26%203D%20HUD.png)
+
+### 2. Services Catalog & Technical Specifications
+Commercial UAV services matrix with category filters and interactive modal displaying aircraft payloads, sensors, and flight parameters.
+![Services Catalog](client/public/img/Services%20Catalog.png)
+
+### 3. Pilot Training Academy & DGCA Certifications
+DGCA certified remote pilot training tracks with syllabus details, duration, requirements, and enrollment CTA hooks.
+![Pilot Training Academy](client/public/img/Pilot%20Training%20Academy.png)
+
+### 4. Lead & Flight Mission Intake Form
+Real-time Zod-validated contact intake desk with airspace coverage map and FAQ accordion.
+![Lead & Contact Intake](client/public/img/Lead%20%26%20Contact%20Intake.png)
+
+### 5. Interactive AI Support Assistant
+Deterministic rule-based copilot with categorized question filters, quick prompt chips, conversation reset, and CTA actions.
+![AI Support Assistant](client/public/img/AI%20Support%20Assistant.png)
+
+### 6. Admin Operations Management Portal
+Multi-tab operational portal with live MongoDB enquiry CRUD data table, search, filtering, status transitions, and CSV export.
+![Admin Operations Portal](client/public/img/Admin%20Operations%20Portal.png)
 
 ---
 
