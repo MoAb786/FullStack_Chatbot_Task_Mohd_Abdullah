@@ -168,20 +168,6 @@ export const ChatbotWidget: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Prompts Bar */}
-          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-hairline bg-surface-container-lowest overflow-x-auto no-scrollbar">
-            {QUICK_PROMPTS.map((prompt) => (
-              <button
-                key={prompt}
-                onClick={() => handleSendMessage(prompt)}
-                className="shrink-0 text-[11px] font-medium px-2.5 py-1 rounded-full bg-surface-container-low text-body hover:bg-ink hover:text-canvas transition-colors border border-hairline flex items-center gap-1 shadow-2xs"
-              >
-                <span className="material-symbols-outlined text-[12px] text-mute">chat_bubble_outline</span>
-                <span>{prompt}</span>
-              </button>
-            ))}
-          </div>
-
           {/* Messages Scroll Area */}
           <div ref={messagesContainerRef} className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-canvas">
             {messages.map((msg) => (
@@ -239,13 +225,27 @@ export const ChatbotWidget: React.FC = () => {
             )}
           </div>
 
+          {/* Quick Prompts Bar (Above Input Form) */}
+          <div className="flex items-center gap-1.5 px-3 py-2 border-t border-hairline bg-surface-container-low overflow-x-auto no-scrollbar shrink-0">
+            {QUICK_PROMPTS.map((prompt) => (
+              <button
+                key={prompt}
+                onClick={() => handleSendMessage(prompt)}
+                className="shrink-0 text-[11px] font-medium px-2.5 py-1 rounded-full bg-surface-container-lowest text-body hover:bg-ink hover:text-canvas transition-colors border border-hairline flex items-center gap-1 shadow-2xs cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-[12px] text-mute">chat_bubble_outline</span>
+                <span>{prompt}</span>
+              </button>
+            ))}
+          </div>
+
           {/* Input Form */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSendMessage();
             }}
-            className="p-3 border-t border-hairline bg-surface-container-lowest flex items-center gap-2"
+            className="p-3 border-t border-hairline bg-surface-container-lowest flex items-center gap-2 shrink-0"
           >
             <input
               type="text"
@@ -257,7 +257,7 @@ export const ChatbotWidget: React.FC = () => {
             <button
               type="submit"
               disabled={!inputValue.trim()}
-              className="flex h-9 w-9 items-center justify-center rounded-lg bg-ink text-canvas hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-xs shrink-0"
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-ink text-canvas hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-xs shrink-0 cursor-pointer"
               aria-label="Send message"
             >
               <span className="material-symbols-outlined text-[18px]">arrow_upward</span>
