@@ -221,30 +221,22 @@ npm start
 
 ## 📸 Screenshots
 
-### 1. Landing Page & 3D Avionics HUD
-Hero section featuring the interactive 60fps 3D Vector Avionics HUD canvas, telemetry gauges, and core capabilities in Dark Mode.
-![Landing Page & 3D HUD](client/public/img/Landing%20Page%20%26%203D%20HUD.png)
+| **1. Landing Page & 3D Avionics HUD** | **2. Services Catalog & Specs Modal** |
+| :---: | :---: |
+| <img src="client/public/img/Landing%20Page%20%26%203D%20HUD.png" width="440" alt="Landing Page & 3D Avionics HUD" /> | <img src="client/public/img/Services%20Catalog.png" width="440" alt="Services Catalog & Specifications Modal" /> |
+| *Hero section with 60fps 3D HUD radar canvas in Dark Mode* | *Enterprise UAV services with technical hardware specs modal* |
 
-### 2. Services Catalog & Technical Specifications
-Commercial UAV services matrix with category filters and interactive modal displaying aircraft payloads, sensors, and flight parameters.
-![Services Catalog](client/public/img/Services%20Catalog.png)
+| **3. Pilot Training Academy & DGCA Tracks** | **4. Lead & Flight Mission Intake Desk** |
+| :---: | :---: |
+| <img src="client/public/img/Pilot%20Training%20Academy.png" width="440" alt="Pilot Training Academy Tracks" /> | <img src="client/public/img/Lead%20%26%20Contact%20Intake.png" width="440" alt="Lead & Flight Mission Intake Desk" /> |
+| *DGCA certified pilot tracks with syllabus breakdowns* | *Real-time Zod-validated contact intake with airspace map* |
 
-### 3. Pilot Training Academy & DGCA Certifications
-DGCA certified remote pilot training tracks with syllabus details, duration, requirements, and enrollment CTA hooks.
-![Pilot Training Academy](client/public/img/Pilot%20Training%20Academy.png)
-
-### 4. Lead & Flight Mission Intake Form
-Real-time Zod-validated contact intake desk with airspace coverage map and FAQ accordion.
-![Lead & Contact Intake](client/public/img/Lead%20%26%20Contact%20Intake.png)
-
-### 5. Interactive AI Support Assistant
-Deterministic rule-based copilot with categorized question filters, quick prompt chips, conversation reset, and CTA actions.
-![AI Support Assistant](client/public/img/AI%20Support%20Assistant.png)
-
-### 6. Admin Operations Management Portal
-Multi-tab operational portal with live MongoDB enquiry CRUD data table, search, filtering, status transitions, and CSV export.
-![Admin Operations Portal](client/public/img/Admin%20Operations%20Portal.png)
+| **5. Interactive AI Support Assistant** | **6. Admin Operations Management Portal** |
+| :---: | :---: |
+| <img src="client/public/img/AI%20Support%20Assistant.png" width="440" alt="Interactive AI Support Assistant" /> | <img src="client/public/img/Admin%20Operations%20Portal.png" width="440" alt="Admin Operations Management Portal" /> |
+| *Deterministic copilot with categorized prompt filters & CTAs* | *Multi-tab operations portal with MongoDB enquiry CRUD & CSV export* |
 
 ---
 
 *Authored by Mohd Abdullah for the IPAGE Group Full Stack Developer Internship Technical Assessment.*
+
