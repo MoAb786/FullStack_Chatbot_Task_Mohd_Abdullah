@@ -141,6 +141,17 @@ export const ChatbotWidget: React.FC = () => {
 
             <div className="flex items-center gap-1">
               <button
+                onClick={() => {
+                  setIsOpen(false);
+                  navigate('/chat');
+                }}
+                className="p-1.5 text-mute hover:text-ink hover:bg-surface-container rounded-md transition-colors"
+                title="Open full-screen chat page (/chat)"
+                aria-label="Open full chat page"
+              >
+                <span className="material-symbols-outlined text-[18px]">open_in_full</span>
+              </button>
+              <button
                 onClick={handleResetChat}
                 className="p-1.5 text-mute hover:text-ink hover:bg-surface-container rounded-md transition-colors"
                 title="Reset conversation"
