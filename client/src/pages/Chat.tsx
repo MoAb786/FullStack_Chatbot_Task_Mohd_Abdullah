@@ -3,6 +3,8 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import type { ChatMessage } from '../types';
 import {
   INITIAL_BOT_MESSAGE,
+  QUICK_PROMPTS,
+  CATEGORIZED_PROMPTS,
   matchChatIntent,
 } from '../data/chatbot';
 
@@ -24,16 +26,13 @@ export const Chat: React.FC = () => {
   });
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const quickPrompts = [
-    'What services do you provide?',
-    'What courses are available?',
-    'How can I contact you?',
-    'How can I register?',
-    'I am a student.',
-    'I want to speak with someone.',
-  ];
+  const displayedPrompts =
+    selectedCategory === 'All'
+      ? QUICK_PROMPTS
+      : CATEGORIZED_PROMPTS.find((c) => c.category === selectedCategory)?.prompts || QUICK_PROMPTS;
 
   useEffect(() => {
     try {
@@ -121,8 +120,8 @@ export const Chat: React.FC = () => {
         </h1>
       </div>
 
-      {/* Main Assistant Console (Width: 100% on small mobile, up to 540px on desktop) */}
-      <div className="w-full max-w-[540px] mx-auto h-[680px] sm:h-[720px] bg-surface-container-lowest border border-hairline rounded-2xl flex flex-col relative overflow-hidden shadow-2xl">
+      {/* Main Assistant Console (Width: 100% on small mobile, up to 600px on desktop) */}
+      <div className="w-full max-w-[620px] mx-auto h-[740px] sm:h-[780px] bg-surface-container-lowest border border-hairline rounded-2xl flex flex-col relative overflow-hidden shadow-2xl">
         {/* 1. Header Component */}
         <div className="px-4 py-3 bg-surface-container-lowest border-b border-hairline flex items-center justify-between z-10 shrink-0">
           <div className="flex items-center gap-3">
@@ -187,12 +186,12 @@ export const Chat: React.FC = () => {
           {messages.map((msg) => (
             <React.Fragment key={msg.id}>
               {msg.sender === 'bot' ? (
-                <div className="flex items-start gap-2.5 max-w-[90%]">
+                <div className="flex items-start gap-2.5 max-w-[92%]">
                   <div className="w-6 h-6 rounded-full border border-hairline bg-ink text-canvas shrink-0 flex items-center justify-center mt-0.5">
                     <span className="material-symbols-outlined text-[13px]">smart_toy</span>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <div className="bg-surface-container-lowest border border-hairline text-ink p-3 rounded-xl rounded-tl-xs shadow-2xs whitespace-pre-wrap leading-relaxed">
+                    <div className="bg-surface-container-lowest border border-hairline text-ink p-3.5 rounded-xl rounded-tl-xs shadow-2xs whitespace-pre-wrap leading-relaxed">
                       {msg.text}
                     </div>
                     {msg.action && (
@@ -206,7 +205,7 @@ export const Chat: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => handleActionClick(msg.action)}
-                          className="inline-flex items-center justify-between w-full px-3 py-1.5 rounded-md bg-ink text-canvas text-[12px] font-medium hover:opacity-90 transition-opacity shadow-2xs"
+                          className="inline-flex items-center justify-between w-full px-3 py-2 rounded-md bg-ink text-canvas text-[12px] font-medium hover:opacity-90 transition-opacity shadow-2xs"
                         >
                           <span>{msg.action.label}</span>
                           <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
@@ -254,23 +253,49 @@ export const Chat: React.FC = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* 3. Quick Reply Chips Section */}
-        <div className="px-4 py-2 border-t border-hairline bg-surface-container-low shrink-0">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="font-mono-eyebrow text-[10px] text-mute uppercase tracking-wider">
-              Suggested Inquiries
-            </span>
-            <span className="font-mono-eyebrow text-[10px] text-mute">6 OPTIONS</span>
+        {/* 3. Predefined Category Tabs & Quick Reply Chips */}
+        <div className="px-4 py-2.5 border-t border-hairline bg-surface-container-low shrink-0 space-y-2">
+          {/* Category Filter Pills */}
+          <div className="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar pb-0.5">
+            <button
+              type="button"
+              onClick={() => setSelectedCategory('All')}
+              className={`shrink-0 text-[11px] font-mono-eyebrow uppercase px-2.5 py-1 rounded-md transition-all ${
+                selectedCategory === 'All'
+                  ? 'bg-ink text-canvas font-semibold shadow-2xs'
+                  : 'bg-surface-container-lowest text-mute hover:text-ink border border-hairline'
+              }`}
+            >
+              All Topics ({QUICK_PROMPTS.length})
+            </button>
+            {CATEGORIZED_PROMPTS.map((cat) => (
+              <button
+                key={cat.category}
+                type="button"
+                onClick={() => setSelectedCategory(cat.category)}
+                className={`shrink-0 text-[11px] font-mono-eyebrow uppercase px-2.5 py-1 rounded-md flex items-center gap-1.5 transition-all ${
+                  selectedCategory === cat.category
+                    ? 'bg-ink text-canvas font-semibold shadow-2xs'
+                    : 'bg-surface-container-lowest text-mute hover:text-ink border border-hairline'
+                }`}
+              >
+                <span className="material-symbols-outlined text-[13px]">{cat.icon}</span>
+                <span>{cat.category.split('&')[0]}</span>
+              </button>
+            ))}
           </div>
+
+          {/* Quick Prompts Chips Horizontal Scroll */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-            {quickPrompts.map((prompt) => (
+            {displayedPrompts.map((prompt) => (
               <button
                 key={prompt}
                 type="button"
                 onClick={() => handleSendMessage(prompt)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full border border-hairline bg-surface-container-lowest hover:bg-ink hover:text-canvas text-ink text-[12px] transition-colors shrink-0 shadow-2xs"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full border border-hairline bg-surface-container-lowest hover:bg-ink hover:text-canvas text-ink text-[12px] transition-colors shrink-0 shadow-2xs flex items-center gap-1"
               >
-                {prompt}
+                <span className="material-symbols-outlined text-[13px] text-mute">chat_bubble_outline</span>
+                <span>{prompt}</span>
               </button>
             ))}
           </div>
@@ -290,14 +315,14 @@ export const Chat: React.FC = () => {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask about training, services, regulations..."
+                placeholder="Ask about pilot courses, eligibility, fees, payloads..."
                 className="w-full bg-surface-container-low border border-hairline rounded-lg px-3.5 py-2 text-[13px] text-ink placeholder:text-mute focus:outline-hidden focus:border-ink transition-all"
               />
             </div>
             <button
               type="submit"
               disabled={!inputValue.trim()}
-              className="h-9 w-9 rounded-lg bg-ink text-canvas flex items-center justify-center hover:opacity-90 disabled:opacity-40 transition-opacity shadow-xs shrink-0"
+              className="h-9 w-9 rounded-lg bg-ink text-canvas flex items-center justify-center hover:opacity-90 disabled:opacity-40 transition-opacity shadow-xs shrink-0 cursor-pointer"
               aria-label="Send"
             >
               <span className="material-symbols-outlined text-[18px]">arrow_upward</span>
@@ -308,3 +333,4 @@ export const Chat: React.FC = () => {
     </div>
   );
 };
+

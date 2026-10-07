@@ -159,13 +159,14 @@ export const ChatbotWidget: React.FC = () => {
 
           {/* Quick Prompts Bar */}
           <div className="flex items-center gap-1.5 px-3 py-2 border-b border-hairline bg-surface-container-lowest overflow-x-auto no-scrollbar">
-            {QUICK_PROMPTS.slice(0, 4).map((prompt) => (
+            {QUICK_PROMPTS.map((prompt) => (
               <button
                 key={prompt}
                 onClick={() => handleSendMessage(prompt)}
-                className="shrink-0 text-[11px] font-medium px-2.5 py-1 rounded-full bg-surface-container-low text-body hover:bg-ink hover:text-canvas transition-colors border border-hairline"
+                className="shrink-0 text-[11px] font-medium px-2.5 py-1 rounded-full bg-surface-container-low text-body hover:bg-ink hover:text-canvas transition-colors border border-hairline flex items-center gap-1 shadow-2xs"
               >
-                {prompt}
+                <span className="material-symbols-outlined text-[12px] text-mute">chat_bubble_outline</span>
+                <span>{prompt}</span>
               </button>
             ))}
           </div>

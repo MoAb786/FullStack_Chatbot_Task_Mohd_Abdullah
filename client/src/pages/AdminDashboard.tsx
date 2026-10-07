@@ -1116,10 +1116,13 @@ export const AdminDashboard: React.FC = () => {
                     {/* Quick test pills */}
                     <div className="flex flex-wrap gap-1.5">
                       {[
-                        'What services do you provide?',
-                        'I need pilot training for DGCA',
-                        'I want to speak with someone',
-                        'Tell me about LiDAR sensors',
+                        'What services does DroneTV provide?',
+                        'What courses / training are available?',
+                        'What are the eligibility requirements for DGCA Pilot License?',
+                        'What is the fee structure / pricing?',
+                        'What drone payloads & sensors do you support?',
+                        'How does precision agriculture spraying work?',
+                        'I want to speak with someone.',
                       ].map((preset) => (
                         <button
                           key={preset}
@@ -1128,7 +1131,7 @@ export const AdminDashboard: React.FC = () => {
                             setCopilotTestQuery(preset);
                             handleRunCopilotTest(preset);
                           }}
-                          className="text-[11px] px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-ink hover:text-canvas text-body border border-hairline transition-colors"
+                          className="text-[11px] px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-ink hover:text-canvas text-body border border-hairline transition-colors cursor-pointer"
                         >
                           {preset}
                         </button>
